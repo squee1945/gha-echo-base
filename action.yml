@@ -12,6 +12,12 @@ runs:
   using: "composite"
   steps:
 
+    - id: validate-input
+      if: ${{ inputs.in-value == '' }}
+      run: |
+        echo "in-value is required."
+        exit 1
+
     - id: in-step
       name: Input value
       run: |
