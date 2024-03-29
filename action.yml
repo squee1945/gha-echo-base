@@ -1,0 +1,27 @@
+name: Echo base
+description: Echos a value.
+inputs:
+  value:
+    description: Value to echo.
+    required: true
+outputs:
+  out-value:
+    description: Echoed value.
+    value: ${{ steps.out-step.outputs.out-step-output }}
+runs:
+  using: "composite"
+  steps:
+
+    - id: in-step
+      name: Input value
+      run: |
+        echo "in-step-output=${{ inputs.value }}" >> $GITHUB_OUTPUT
+
+    - id: fail-if-not-set
+      if: ${{ steps.in-step.outputs.in-step-output == "" }}
+      uses: squee1945/gha-fail@main
+
+    - id: out-step
+      name: Output value
+      run: |
+        echo "out-step-output=${{ steps.in-step.outputs.in-step-output }}" >> $GITHUB_OUTPUT
