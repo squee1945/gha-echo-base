@@ -1,7 +1,7 @@
 name: Echo base
 description: Echos a value.
 inputs:
-  value:
+  in-value:
     description: Value to echo.
     required: true
 outputs:
@@ -15,7 +15,7 @@ runs:
     - id: in-step
       name: Input value
       run: |
-        echo "in-step-output=${{ inputs.value }}" >> $GITHUB_OUTPUT
+        echo "in-step-output=${{ inputs.in-value }}" >> $GITHUB_OUTPUT
 
     - id: fail-if-not-set
       if: ${{ steps.in-step.outputs.in-step-output == '' }}
