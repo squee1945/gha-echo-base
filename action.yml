@@ -18,7 +18,7 @@ runs:
         echo "in-step-output=${{ inputs.value }}" >> $GITHUB_OUTPUT
 
     - id: fail-if-not-set
-      if: ${{ steps.in-step.outputs.in-step-output == "" }}
+      if: ${{ steps.in-step.outputs.in-step-output == '' }}
       uses: squee1945/gha-fail@main
 
     - id: out-step
